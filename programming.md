@@ -289,6 +289,9 @@ Python features that {{ site.name }} currently doesn't support.  Note that
 these restrictions **apply only to the entry point script** `handler.py`, and
 not to any other Python modules in the application.
 
+- Mutable global variables.
+  - {{ site.name }} assumes any module-level variables in `handler.py` to be
+    constant and so doesn't save them in checkpoints.
 - Generators (`yield` statements) and generator expressions;
 - Nested functions and classes; lambdas;
 - Context managers, i.e., `with` statements;
