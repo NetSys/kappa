@@ -1,11 +1,15 @@
 ---
-layout: default
+layout: doc
+title: Programming Model
+category: user-guide
 ---
-# Programming Model
+* TOC
+{:toc}
 
 {{ site.name }} aims to run mostly unmodified **Python 3** code on serverless
 platforms.  As such, {{ site.name }} application code is mostly just ordinary
-Python 3 code, with a few extra features and restrictions described below.
+Python 3 code, with a few extra features and restrictions which are described
+below.
 
 ## Application Structure
 
@@ -57,15 +61,15 @@ checkpoints periodically so that when a lambda function dies, the task can be
 resumed from a recent checkpoint on a fresh lambda function.
 
 The programmer is responsible for ensuring that adequate checkpoints be taken.
-For example, as explained in the Quick-Start Tutorial, you may call
-`checkpoint()` every `x` number of iterations in a loop to take checkpoints
+For example, as explained in the [Quick-Start Tutorial](/quick-start), you may
+call `checkpoint()` every `x` number of iterations in a loop to take checkpoints
 frequently.  The `checkpoint` function belongs to a class of special functions
 called **coordinator calls** (see below); making any coordinator call
 automatically takes a checkpoint.
 
 To take a checkpoint, the {{ site.name }} runtime library serializes and saves
 all **live variables** at the program point where the checkpoint is taken.
-Informally, a variable is live at a program point if it can be accessed by
+Informally, a variable can be live at a program point if it can be accessed by
 subsequent code.  For example, in the following code snippet:
 ```python
 def foo(x, y):
@@ -161,6 +165,7 @@ def fib(n):
 def handler(event, _):
     return fib(event["n"])
 ```
+{: .copy}
 
 The `spawn` function takes a function `f` and a sequence of arguments `args`,
 spawns a task that runs `f(*args)`, and returns a **future** object to the
@@ -217,6 +222,7 @@ def handler(_event, _):
     spawn(gen, (q,))
     assert fut.wait() == 2
 ```
+{: .copy}
 
 The entry point `handler` function creates a queue `q` and passes it to two
 spawned tasks:
@@ -237,11 +243,13 @@ Finally, note that the `handler` function is annotated with `@on_coordinator`.
 When a task is spawned running an `on_coordinator` function, the task is
 launched as a normal Python process **on the coordinator machine** instead of
 on a lambda function.  As a result, such tasks can issue coordinator calls
-faster (because no network latency), and do not suffer from lambda function
-timeouts.  However, they take up resources on the coordinator machine.  The
+faster (no network latency), and do not suffer from lambda function
+timeouts.
+
+However, these functions take up resources on the coordinator machine.  The
 `handler` function above is a good candidate for an `on_coordinator` task
 because it mostly just spawns and waits on other tasks and does little
-computation of its own.
+computation on its own.
 
 ## Idempotence
 

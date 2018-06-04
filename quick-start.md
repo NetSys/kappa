@@ -1,7 +1,11 @@
 ---
-layout: default
+layout: doc
+title: Quick-Start Tutorial
+category: user-guide
 ---
-# Quick-Start Tutorial
+* TOC
+{:toc}
+
 In this tutorial, we will set up the {{ site.name }} framework and use it to
 run a simple "factorial" application on the
 [AWS Lambda](https://aws.amazon.com/lambda/) serverless platform.
@@ -14,12 +18,12 @@ To set up {{ site.name }}, you need:
 
 You may set up this environment either on your local machine or on a
 virtual machine in the cloud (e.g., an Amazon EC2 instance).
-From now on, we'll refer to this machine as the *coordinator machine*.
+From now on, we'll refer to this machine as the **coordinator machine**.
 
 The coordinator machine, in order to receive requests from lambda
 functions, must be publicly accessible on the Internet.
 For example, a machine behind a NAT or a firewall preventing incoming
-connections may not satisfy this requirement.
+connections might not satisfy this requirement.
 
 For {{ site.name }} to run applications on AWS Lambda, you need to have
 an account with [Amazon Web Services](https://aws.amazon.com/) (AWS).
@@ -27,8 +31,8 @@ an account with [Amazon Web Services](https://aws.amazon.com/) (AWS).
 If you have already set up your AWS credentials, e.g., through the AWS CLI,
 you're all set as {{ site.name }} will detect your credentials automatically.
 Otherwise, now's a good time to get your access key ready
-([here's how](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html));
-it should look something like this:
+([here's how](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)).
+It should look something like this:
 ```
 Access key ID: AKIAIOSFODNN7EXAMPLE
 Secret access key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
@@ -42,7 +46,6 @@ executing {{ site.name }} applications.
 
 **TODO**: make this work.
 
-**TODO**: this snippet doesn't seem copy-pastable.
 ```console
 user:./$ mkdir kappa_home; cd kappa_home
 user:./kappa_home$ wget {{ site.url }}{{ site.baseurl }}/kappa
@@ -79,6 +82,7 @@ def handler(event, _):
     n = event["n"]
     return factorial(n)
 ```
+{: .copy #fact-func}
 
 Application execution begins from the `handler` function.  It takes an `event`
 argument, which contains application input provided by the user at invocation
@@ -136,17 +140,19 @@ application's final result, i.e., the `handler` function's return value:
 
 The {{ site.name }} logs are also written to files located in the directory
 displayed in the last line of the output:
-```console
-<2018-05-28 15:17:33> Kappa logs can be found in /your/files/logs
+```
+<2018-05-28 15:17:33> Kappa logs can be found in /path/to/kappa/logs/factorial_app
 ```
 
 Check out the log files:
 ```console
-user:./kappa_home$ ls logs
-factorial-log-0
-user:./kappa_home$ ls logs/factorial-log-0/
+user:./kappa_home$ ls logs/factorial_app/
+2018-06-04_20:51:17_ed1e9061-7771-44db-a982-36eb58e0776c
+user:./kappa_home$ ls logs/factorial_app/2018-06-04_20:51:17_ed1e9061-7771-44db-a982-36eb58e0776c
 coordinator.log handlers.log
 ```
+{: .no_copy}
+
 As can be seen, the log directory contains two files:
 - `coordinator.log` is the *coordinator log*, which just contains log messages
   printed to the terminal and describes events such as lambda function
@@ -167,7 +173,8 @@ As can be seen, the log directory contains two files:
   i = 9
   i = 10
   ```
-  These lines correspond to the `print` statement in the `factorial` function.
+  These lines correspond to the `print` statement in the `factorial`
+  [function](#fact-func).
 
 ## More Options
 
