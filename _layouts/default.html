@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
-
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,maximum-scale=2">
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <script src="/assets/js/smooth-scroll.polyfills.min.js"></script>
-
-{% seo %}
-  </head>
-
+  {% include head.html %}
   <body>
 
     <!-- HEADER -->
@@ -34,26 +23,25 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
+        {{ content }}
+        {%- if page.title == "index" -%}
+          <a href="/quick-start">
+            <div class="large_banner">
+              Program with {{ site.name }}
+              <i class="fa fa-caret-right"></i><i class="fa fa-caret-right"></i>
+            </div>
+          </a>
+        {%- endif -%}
         <div class="center">
-          <a data-scroll href="#getting-kappa" class="banner"><i class="fa fa-clipboard"></i> Guide</a>
-          <a class="banner"><i class="fa fa-question-circle"></i> Support</a>
+          <a href="/guides" class="banner"><i class="fa fa-user"></i> User Guides</a>
+          <a href="/support" class="banner"><i class="fa fa-question-circle"></i> Support</a>
           <!-- <a class="banner"><i class="fa fa-edit"></i> Contribute</a> -->
           <a class="banner"><i class="fa fa-book-open"></i> API Docs</a>
         </div>
-        {{ content }}
       </section>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        {% if site.github.is_project_page %}
-        <p class="copyright">{{ site.title | default: site.github.repository_name }} is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
-        {% endif %}
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a> using modified <a href="https://github.com/pages-themes/slate/">Slate</a> theme</p>
-      </footer>
-    </div>
-
+    {%- include footer.html -%}
     {% if site.google_analytics %}
       <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
