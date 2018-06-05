@@ -7,8 +7,9 @@ underlying HTML that our website is built on. Follow the instructions
 **This website uses Jekyll 3.6.2.**
 
 # Step 2: Clone the Website
-- Run `git clone https://github.com/NetSys/kappa.git`
+- Run `git clone https://github.com/NetSys/kappa.git ; cd kappa`
 - Run `git checkout website` to switch to the website branch.
+- Run `bundle install` to install dependencies.
 
 # Step 3: Build the Website Locally
 - Run `bundle exec jekyll serve` to build and serve the website locally.
