@@ -47,4 +47,3 @@ new ClipboardJS(".btn", {
         return $(id).text();
     }
 });
-//new ClipboardJS('.btn');
