@@ -6,12 +6,10 @@ title: index
 serverless environments, and provides developers with concurrency mechanisms
 that enable parallel computation and coordination in these environments.
 
-## Get {{ site.name }}
-```console
-user:./$ mkdir kappa_home; cd kappa_home
-user:./kappa_home$ wget {{ site.url }}{{ site.baseurl }}/kappa
-user:./kappa_home$ chmod +x kappa
-```
-{{ site.name }} comes in a single Bash script, `kappa`, which is responsible
-both for downloading {{ site.name }} and executing {{ site.name }} applications.
-
+<div id="cucumber">
+    <img src="/assets/img/cucumber.svg" class="cucumber">
+    <img src="/assets/img/cucumber.svg" class="cucumber">
+    <img src="/assets/img/cucumber.svg" class="cucumber">
+    <img src="/assets/img/cucumber.svg" class="cucumber">
+    <img src="/assets/img/cucumber.svg" class="cucumber">
+</div>

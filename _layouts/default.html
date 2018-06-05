@@ -8,7 +8,7 @@
         <header class="inner">
           <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
 
-          <a href="/"><h1 id="project_title">{{ site.title | default: site.github.repository_name }}</h1></a>
+          <h1 id="project_title"><a href="/">{{ site.title }}</a></h1>
           <h2 id="project_tagline">{{ site.description | default: site.github.project_tagline }}</h2>
 
           {% if site.show_downloads %}
@@ -25,18 +25,18 @@
       <section id="main_content" class="inner">
         {{ content }}
         {%- if page.title == "index" -%}
-          <a href="/quick-start">
-            <div class="large_banner">
-              Program with {{ site.name }}
-              <i class="fa fa-caret-right"></i><i class="fa fa-caret-right"></i>
-            </div>
+        <div class="large_banner_wrap">
+          <a href="/quick-start" class="large_banner">
+            Start using {{ site.name }}
+            <i class="fa fa-caret-right"></i><i class="fa fa-caret-right"></i>
           </a>
+        </div>
         {%- endif -%}
         <div class="center">
-          <a href="/guides" class="banner"><i class="fa fa-user"></i> User Guides</a>
+          <a href="/programming" class="banner"><i class="fa fa-book-open"></i> Programming Model</a>
+          <a href="/guides" class="banner"><i class="fa fa-user"></i> User Guides </a>
           <a href="/support" class="banner"><i class="fa fa-question-circle"></i> Support</a>
           <!-- <a class="banner"><i class="fa fa-edit"></i> Contribute</a> -->
-          <a class="banner"><i class="fa fa-book-open"></i> API Docs</a>
         </div>
       </section>
     </div>
@@ -55,5 +55,8 @@
     <script>
       var scroll = new SmoothScroll('a[href*="#"]');
     </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="/assets/js/clipboard.min.js"></script>
+    <script src="/assets/js/code-clip.js"></script>
   </body>
 </html>
