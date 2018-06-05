@@ -1,5 +1,4 @@
 -e git+https://github.com/berkerpeksag/astor.git#egg=astor
-parameterized==0.6.1
 mypy==0.600
 typing-extensions==3.6.2.1
 boto3==1.5.14
