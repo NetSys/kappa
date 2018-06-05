@@ -3,8 +3,13 @@
 
 $font-stack: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 @import "{{ site.theme }}";
+
 .highlight {
     background-color: white;
+}
+
+.highlight .go {
+    color: black;
 }
 
 body {
@@ -47,7 +52,7 @@ a.banner {
     display: inline-block;
     padding: 10px 10px 10px 10px;
     color: #fff;
-    background: #3a7a98;
+    background: $bottom;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
@@ -60,4 +65,102 @@ a.banner {
 
 #main_content {
     padding-top: 15px;
+}
+
+#page_title {
+    font-weight: 300;
+}
+
+#site_title {
+    color: white;
+    text-shadow: #111 0px 0px 10px;
+}
+
+#markdown-toc {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    left: -230px;
+    top: 0;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.8);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding: 5px 0px 5px 26px;
+    box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+}
+
+#markdown-toc ul, #markdown-toc li {
+    list-style-type: bullet;
+}
+
+#markdown-toc li li {
+    list-style-type: circle;
+}
+.back-to-top {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 5px;
+    color: rgba(15, 121, 208, 0.5);
+    -o-transition:color .2s ease-out, background 1s ease-in;
+    -ms-transition:color .2s ease-out, background 1s ease-in;
+    -moz-transition:color .2s ease-out, background 1s ease-in;
+    -webkit-transition:color .2s ease-out, background 1s ease-in;
+    transition:color .2s ease-out, background 1s ease-in;
+    &:hover {
+        text-decoration: none;
+        color: rgb(15, 121, 208);
+    }
+    &:focus {
+        text-decoration: none;
+        font-weight: inherit;
+    }
+}
+
+.back-to-top i {
+    font-size: 20px;
+}
+
+.invisible {
+    display: none;
+}
+
+.highlight {
+    position: relative;
+}
+
+.btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    font-size: 14px;
+    background-color: rgba(200, 200, 200, 0.5);
+    color: rgba(100, 100, 100, 0.5);
+    -o-transition:color .2s ease-out, background 1s ease-in;
+    -ms-transition:color .2s ease-out, background 1s ease-in;
+    -moz-transition:color .2s ease-out, background 1s ease-in;
+    -webkit-transition:color .2s ease-out, background 1s ease-in;
+    transition:color .2s ease-out, background 1s ease-in;
+    cursor: pointer;
+    &:hover {
+        text-decoration: none;
+        color: rgb(100, 100, 100);
+    }
+}
+
+.large_banner {
+    margin: 10px 0;
+    padding: 10px 10px 10px 10px;
+    color: #fff;
+    background: $bottom;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    font-size: 30px;
+    color: white;
+    font-weight: 300;
+    text-align: center;
 }
