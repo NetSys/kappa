@@ -1,0 +1,3 @@
+# Directory to put checkpoints in.
+# If null, the coordinator creates a temporary directory for checkpoints and removes the directory at cleanup time.
+checkpoint_dir: null

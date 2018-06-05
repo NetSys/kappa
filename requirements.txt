@@ -1,0 +1,4 @@
+-r compiler/requirements.txt
+pytest==3.4.0
+pytest-xdist==1.22.0
+boto3==1.5.14

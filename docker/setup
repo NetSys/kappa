@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+mkdir -p "$HOME/.aws"
+should_configure=false
+
+if [ ! -f "$HOME/.aws/config" ]; then
+  should_configure=true
+  cat > "$HOME/.aws/config" <<- EOM
+    [default]
+    output=json
+    region=
+EOM
+fi
+
+if [ ! -f "$HOME/.aws/credentials" ]; then
+  should_configure=true
+  cat > "$HOME/.aws/credentials" <<- EOM
+    [default]
+    aws_access_key_id=
+    aws_secret_access_key=
+EOM
+fi
+
+if [ "$should_configure" = true ]; then
+  echo "=== AWS Configuration ==="
+  aws configure
+else
+  echo "=== AWS Configuration Detected ==="
+fi

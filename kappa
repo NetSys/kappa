@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+if [ $# -lt 1 ]; then
+  echo "[ AWS_DIR=your/aws/dir ] ./run code_dir [ --coordinator_param=value ... ]"
+  exit 1
+fi
+
+# Directory that `run` is located in
+RUN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+function log() {
+  echo "<`date '+%Y-%m-%d %H:%M:%S'`> $1"
+}
+
+function abs_path() {
+  # Usage: abs_path path var
+  # Sets var to be the expanded (absolute) path of path.
+  local abs
+  if [[ "$1" = /* ]] # If path is an absolute path.
+    then
+      abs=${1%/} # Get rid of trailing slash.
+    else
+      abs="$(pwd)/${1%/}"
+  fi
+  eval "$2=$abs"
+}
+
+# Docker only lets you mount folders with absolute paths.
+abs_path $1 CODE_DIR
+shift 1
+
+# Make sure that handler.py is in code_dir.
+if [ ! -f "$CODE_DIR/handler.py" ]
+  then
+    echo "$CODE_DIR/handler.py does not exist."
+    exit 1
+fi
+WORKLOAD_NAME=`basename $CODE_DIR`
+
+# Find or make the logging directory.
+LOG_DIR=$RUN_DIR/logs
+if [ ! -d $LOG_DIR ]
+  then
+    mkdir -p $LOG_DIR
+    log "Creating $LOG_DIR"
+fi
+
+log "Logging to $LOG_DIR"
+
+# Find AWS Credentials.
+if [ -n "$AWS" ]
+  then
+    abs_path $AWS AWS_DIR
+  elif [ -d $HOME/.aws ]
+    then
+      AWS_DIR=$HOME/.aws
+  elif [ -d $RUN_DIR/.aws ]
+    then
+      AWS_DIR=$RUN_DIR/.aws
+  else
+    log "No AWS credential directory provided"
+    read -p "Create one in $RUN_DIR (y/n)? " choice
+    if [[ $choice == [yY] || $choice == [yY][eE][sS] ]]
+      then
+        mkdir -p $RUN_DIR/.aws
+        AWS_DIR=$RUN_DIR/.aws
+        log "Created $AWS_DIR"
+        log "Update credentials by running \`rm -r $AWS_DIR\` and rerunning this script"
+      else
+        echo "Please create an AWS credential directory and rerun this script with AWS_DIR=your/aws/dir"
+        exit 1
+    fi
+fi
+
+log "Using AWS credentials from $AWS_DIR"
+
+log "Pulling Container"
+docker pull vfang/kappa:latest
+docker tag vfang/kappa:latest kappa:latest
+
+log "Starting Container"
+docker run --rm --name kappa -v $AWS_DIR:/root/.aws -v $CODE_DIR:/root/scripts -v $LOG_DIR:/root/out -p 43731:43731 -i -t kappa:latest run $(id -u) $(id -g) $WORKLOAD_NAME "$@"
+
+log "All Kappa logs are in $LOG_DIR/$WORKLOAD_NAME"

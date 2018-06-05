@@ -1,0 +1,3 @@
+# S3 bucket to put checkpoint files in.
+# If null, the coordinator creates a temporary S3 bucket for checkpoints and deletes the bucket at cleanup time.
+checkpoint_bucket: null
