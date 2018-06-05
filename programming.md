@@ -69,7 +69,7 @@ automatically takes a checkpoint.
 
 To take a checkpoint, the {{ site.name }} runtime library serializes and saves
 all **live variables** at the program point where the checkpoint is taken.
-Informally, a variable can be live at a program point if it can be accessed by
+Informally, a variable is live at a program point if it can be accessed by
 subsequent code.  For example, in the following code snippet:
 ```python
 def foo(x, y):
@@ -249,7 +249,7 @@ timeouts.
 However, these functions take up resources on the coordinator machine.  The
 `handler` function above is a good candidate for an `on_coordinator` task
 because it mostly just spawns and waits on other tasks and does little
-computation on its own.
+computation.
 
 ## Idempotence
 
