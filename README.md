@@ -18,29 +18,29 @@ If you only wish to use Kappa to write and run applications, see the "Get Kappa"
 To build and run Kappa, you need:
 
 - A Unix-like environment (e.g., Linux or Mac OS).
-- [Python](https://www.python.org/downloads/) 3.6 or higher.
+- Python 3.6 or higher ([install](https://www.python.org/downloads/)).
+  - We recommended creating a Python
+    [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+    with the desired Python version.
+
   ```console
   user:./$ python3 --version
   Python 3.6.5
   ```
-- [Go](https://golang.org/doc/install) 1.10 or higher.
+- Go 1.10 or higher ([install](https://golang.org/doc/install)).
   ```console
   user:./$ go version
   go version go1.10.2 darwin/amd64
   ```
 
-We recommended creating a Python
-[virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
-in which to install Python dependencies for Kappa.
-
 Certain example programs also require the `unbuffer` command.
 
 - To install on Mac OS using Homebrew:
-  ```console
+  ```
   brew install expect
   ```
-- To install on ubuntu:
-  ```console
+- To install on Ubuntu:
+  ```
   sudo apt install expect
   ```
 
@@ -54,9 +54,9 @@ There are several example Kappa applications under the [examples](examples) dire
 
 ### Testing
 
-The Kappa tests are written using the [pytest](https://docs.pytest.org/en/latest/) framework and are located at
+The Kappa tests are written using the [`pytest`](https://docs.pytest.org/en/latest/) framework and are located at
 [test_integration.py](test_integration.py).  To run the tests, use a command like:
-```console
+```
 pytest test_integration.py -v -n 4
 ```
 This command runs the tests in verbose mode using 4 parallel processes.
