@@ -22,7 +22,37 @@ h1, h2, h3, h4, h5 {
     font-weight: 300;
 }
 
-a:hover {
+h1 a, a.banner, a.large_banner {
+    position: relative;
+    color: white;
+    z-index: 10;
+    &:hover, &:focus {
+        text-decoration: none;
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 6px;
+        bottom: -2px;
+        left: 0;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 50%);
+        background-size: 200%;
+        background-position: 100% 0;
+        transition: all 0.3s ease 0s;
+        overflow: hidden;
+        z-index: 5;
+    }
+
+    &:hover:before, &:active:before {
+        background-position: 0 0;
+    }
+
+}
+
+
+a:hover, a:focus {
     font-weight: inherit;
 }
 
@@ -32,7 +62,7 @@ footer p {
 
 $top: #244f63;
 $bottom: #112933;
-#header_wrap {
+.large_banner_wrap, #header_wrap {
     background: $bottom; background: -moz-linear-gradient(top, $top,
     $bottom); background: -webkit-linear-gradient(top, $top, $bottom);
     background: -ms-linear-gradient(top, $top, $bottom); background:
@@ -151,16 +181,36 @@ a.banner {
     }
 }
 
+.large_banner_wrap {
+    margin: 12px 0;
+    text-align: center;
+    display: block;
+}
+
 .large_banner {
-    margin: 10px 0;
-    padding: 10px 10px 10px 10px;
-    color: #fff;
-    background: $bottom;
+    display: block;
+    padding: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
     font-size: 30px;
-    color: white;
     font-weight: 300;
+    &:hover, &:focus {
+        font-weight: 300;
+    }
+}
+
+#cucumber {
     text-align: center;
+}
+
+.cucumber {
+    display: inline;
+    margin: 0 5px;
+    border: unset;
+    box-shadow: unset;
+    -moz-box-shadow: unset;
+    -o-box-shadow: unset;
+    -ms-box-shadow: unset;
+    width: 100px;
 }
