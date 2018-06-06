@@ -1,9 +1,19 @@
 ---
 layout: default
 ---
-{{ site.name }} automates the task of porting application code to run in
-serverless environments, and provides developers with concurrency mechanisms
-that enable parallel computation and coordination in these environments.
+Serverless computing (e.g., [AWS Lambda](https://aws.amazon.com/lambda/))
+was initially designed for event-driven applications, where each event handler
+is guaranteed to complete within a limited time duration.
+
+**{{ site.name }}** aims to enable **general purpose, parallel computation** on
+serverless platforms.  To do this, Kappa provides:
+- a continuation-based checkpointing mechanism that allows long-running
+  computations on time-bounded lambda functions; and,
+- a message-passing concurrency API for easily expressing parallelism and
+  exploiting the elasticity of serverless platforms.
+
+If you have any questions or feedback, visit the [Support](support/) page or
+email us at <span id="email"></span>.
 
 <div id="cucumber">
     <img src="/assets/img/cucumber.svg" class="cucumber">
