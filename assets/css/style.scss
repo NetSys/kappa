@@ -83,7 +83,8 @@ body {
 
 a.banner {
     display: inline-block;
-    padding: 10px 10px 10px 10px;
+    margin-top: 10px;
+    padding: 10px;
     color: #fff;
     background: $bottom;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -201,21 +202,6 @@ a.banner {
     &:hover, &:focus {
         font-weight: 300;
     }
-}
-
-#cucumber {
-    text-align: center;
-}
-
-.cucumber {
-    display: inline;
-    margin: 0 5px;
-    border: unset;
-    box-shadow: unset;
-    -moz-box-shadow: unset;
-    -o-box-shadow: unset;
-    -ms-box-shadow: unset;
-    width: 100px;
 }
 
 #forkme_banner {
