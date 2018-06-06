@@ -3,7 +3,7 @@ FROM kappa:deps
 WORKDIR /root
 
 ENV PATH="$PATH:/root:/root/compiler"
-ENV KAPPAPATH="/root"
+ENV KAPPA_PATH="/root"
 
 COPY examples/ examples/
 COPY deps/compiler/invoker.py deps/compiler/do_transform.py compiler/

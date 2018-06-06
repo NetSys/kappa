@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"fmt"
 	"go/build"
 	"os"
@@ -36,7 +37,7 @@ func ensureDirectory(path string) error {
 
 // detectKappaDir tries to detect the directory where Kappa is located.
 func detectKappaDir() (string, error) {
-	if p := os.Getenv("KAPPAPATH"); p != "" {
+	if p := os.Getenv("KAPPA_PATH"); p != "" {
 		return p, nil
 	}
 
@@ -45,11 +46,13 @@ func detectKappaDir() (string, error) {
 		gopath = build.Default.GOPATH
 	}
 
-	kappaDir := path.Join(gopath, "src/github.com/NetSys/kappa")
-	if err := ensureDirectory(kappaDir); err == nil {
-		return kappaDir, nil
+	for _, d := range strings.Split(gopath, ":") {
+		// The GOPATH separator is semicolon on Windows, but we don't support Windows anyway.
+		p := path.Join(d, "src/github.com/NetSys/kappa")
+		if err := ensureDirectory(p); err == nil {
+			return p, nil
+		}
 	}
 
-	// By default, assume the current working directory is the Kappa directory.
-	return os.Getwd()
+	return "", errors.New("cannot locate Kappa path; please set KAPPA_PATH environment variable")
 }
