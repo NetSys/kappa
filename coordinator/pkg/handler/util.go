@@ -6,6 +6,7 @@ import (
 	"go/build"
 	"os"
 	"path"
+	"strings"
 
 	cp "github.com/NetSys/kappa/coordinator/pkg/cloudplatform"
 )
