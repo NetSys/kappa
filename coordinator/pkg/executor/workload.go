@@ -69,7 +69,7 @@ func NewWorkload(platform string, conf io.Reader, name string, deployedFiles []s
 	}
 
 	// Add a bit to account for network latency, etc.
-	handlerEnv["RPC_HTTP_TIMEOUT"] = fmt.Sprintf("%g", rpcTimeout.Seconds() + 1)
+	handlerEnv["RPC_HTTP_TIMEOUT"] = fmt.Sprintf("%g", rpcTimeout.Seconds()+1)
 
 	if logWriter != ioutil.Discard {
 		// Optimization: don't make writer take mutex if the writer discards everything.
