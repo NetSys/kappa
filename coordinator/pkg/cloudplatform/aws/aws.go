@@ -491,7 +491,7 @@ func fetchMessagesFromStream(svc *cloudwatchlogs.CloudWatchLogs, logGroup string
 	err := svc.GetLogEventsPages(input,
 		func(page *cloudwatchlogs.GetLogEventsOutput, _ bool) bool {
 			for _, event := range page.Events {
-				messages = append(messages, fmt.Sprintf("%d\t%s", *event.IngestionTime, *event.Message))
+				messages = append(messages, *event.Message)
 			}
 
 			if lastToken == *page.NextForwardToken { // No more log entries.
