@@ -22,7 +22,7 @@ log "Running Coordinator"
 mkdir -p out/$WORKLOAD
 cd out/$WORKLOAD
 
-LOGGING_DIR=`date '+%Y-%m-%d_%H:%M:%S'`_`cat /proc/sys/kernel/random/uuid`
+LOGGING_DIR=`date '+%Y-%m-%d_%H-%M-%S'`_`cat /proc/sys/kernel/random/uuid`
 coordinator "${@}" --name=$WORKLOAD --log-dir=$LOGGING_DIR /root/handler/handler_transformed.py /root/scripts/* /root/compiler/rt/
 
 if [ -d "/root/out/$WORKLOAD/$LOGGING_DIR" ]
