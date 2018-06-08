@@ -1,5 +1,8 @@
 package handler
 
+// This source file has a corresponding, easyjson-generated file named `protocol_easyjson.go`.
+// If you update this file, don't forget to run `easyjson -all protocol.go`.
+
 import (
 	"encoding/json"
 	"fmt"

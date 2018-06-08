@@ -1,5 +1,8 @@
 package executor
 
+// This source file has a corresponding, easyjson-generated file named `coordcall_easyjson.go`.
+// If you update this file, don't forget to run `easyjson -all coordcall.go`.
+
 import (
 	"encoding/json"
 	"fmt"
