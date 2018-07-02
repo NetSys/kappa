@@ -1,11 +1,23 @@
 #!/usr/bin/env bash
 if [ $# -lt 1 ]; then
-  echo "Usage: [ AWS_DIR=your/aws/dir ] $0 code_dir [ --coordinator_param=value ... ]"
+  echo "Usage: [ AWS_DIR=your/aws/dir ] $(basename "$0") code_dir [ --coordinator_param=value ... ]"
   exit 1
 fi
 
-# Directory that `run` is located in
-RUN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+if ! [ -x "$(command -v docker)" ]; then
+  echo 'Error: docker is not installed.' >&2
+  exit 1
+fi
+
+# Detect directory that this script is located in, resolving symlinks
+# Taken from: https://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+RUN_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 function log() {
   echo "<`date '+%Y-%m-%d %H:%M:%S'`> $1"
