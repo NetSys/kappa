@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 if [ $# -lt 1 ]; then
-  echo "[ AWS_DIR=your/aws/dir ] ./run code_dir [ --coordinator_param=value ... ]"
+  echo "Usage: [ AWS_DIR=your/aws/dir ] $0 code_dir [ --coordinator_param=value ... ]"
   exit 1
 fi
 
