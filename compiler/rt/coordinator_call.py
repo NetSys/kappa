@@ -183,9 +183,6 @@ class Spawn(CoordinatorCall):
         return [_deserialize_result(ret) for ret in result["rets"]]
 
     def _finalize_params(self, chk_manager: CheckpointManager, pid: Pid, seqno: Seqno) -> ParamDict:
-        if not chk_manager.supports_multitasking:
-            raise ValueError("{} doesn't support multitasking.".format(chk_manager.__class__))
-
         # It's fine to use the same PID for all spawns because the checkpoint manager generates a unique checkpoint ID.
         child_chk_id = chk_manager.save([self.child_cont], NEW_PID, INITIAL_SEQNO)
         params: ParamDict = {
@@ -297,9 +294,6 @@ class MapSpawn(CoordinatorCall):
         return [Future(Pid(pid)) for pid in children_pids]
 
     def _finalize_params(self, chk_manager: CheckpointManager, pid: Pid, seqno: Seqno) -> ParamDict:
-        if not chk_manager.supports_multitasking:
-            raise ValueError("{} doesn't support multitasking.".format(chk_manager.__class__))
-
         # It's fine to use the same PID for all spawns because the checkpoint manager generates a unique checkpoint ID.
         child_chk_id = chk_manager.save([self.child_cont], NEW_PID, INITIAL_SEQNO)
         params: ParamDict = {

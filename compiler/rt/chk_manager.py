@@ -18,11 +18,6 @@ NULL_CHK_ID = CheckpointID("")  # Signifies "no checkpoint".
 class CheckpointManager(ABC):
     """Abstract base class for checkpoint managers."""
     logger = logging.getLogger(__name__)
-    supports_multitasking = False  # Set to True if manager supports spawning multiple Kappa tasks.
-
-    # Set to True if manager supports saving checkpoint in the background.  If True, the `save_from_file` method must
-    # be implemented.
-    supports_async = False
 
     @abstractmethod
     def load(self, chk_id: CheckpointID) -> Optional[Continuations]:
@@ -50,7 +45,7 @@ class CheckpointManager(ABC):
         """
         Persists a checkpoint previously serialized in a file object.
 
-        The file object must have been populated using the `serialize_to_file` method.
+        Precondition: the file object has been populated using the `serialize_to_file` method.
         """
         raise NotImplementedError
 
@@ -73,8 +68,6 @@ class CheckpointManager(ABC):
 
 class LocalCheckpointManager(CheckpointManager):
     """Checkpoint manager for a local invocation from the coordinator."""
-    supports_multitasking = True
-    supports_async = True
 
     def __init__(self, checkpoint_dir: Path) -> None:
         super(LocalCheckpointManager, self).__init__()
@@ -110,8 +103,6 @@ class LocalCheckpointManager(CheckpointManager):
 
 class S3CheckpointManager(CheckpointManager):
     """Checkpoint manager that stores checkpoints in an S3 bucket."""
-    supports_multitasking = True
-    supports_async = True
 
     def __init__(self, bucket_name: str) -> None:
         """Initializes a checkpoint manager with the name of the bucket to store checkpoints in."""

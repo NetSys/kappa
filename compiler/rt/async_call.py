@@ -62,7 +62,7 @@ class AsyncCaller(object):
 
         Raises `AsyncCallsNotSupported` if asynchronous calls are not supported.
         """
-        if not rpc_addr or not chk_manager.supports_async:
+        if not rpc_addr:
             raise AsyncCallsNotSupported
 
         self.rpc_addr = rpc_addr
