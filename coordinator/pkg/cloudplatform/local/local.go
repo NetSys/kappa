@@ -56,8 +56,12 @@ func CreateHandler(kappaDir string, name string, deployedFiles []string, env cp.
 	args = append(args, "--deploy", deployDir)
 
 	cmd := exec.Command(invokerInterpreter, args...)
+	var stderr bytes.Buffer
+	cmd.Stderr = &stderr
+
 	if err := cmd.Run(); err != nil {
-		return nil, fmt.Errorf("cloudplatform.local.CreateHandler: deploy failed: %v", err)
+		return nil, fmt.Errorf("cloudplatform.local.CreateHandler: deploy failed: %v (stderr: %s)", err,
+			stderr.String())
 	}
 	log.Println("cloudplatform.local.CreateHandler: package deployed locally at:", deployDir)
 
